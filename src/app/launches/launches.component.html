@@ -1,3 +1,14 @@
-<p>
-  launches works!
-</p>
+
+<div>
+  <h2>SpaceX Launches</h2>
+</div>
+
+<div>
+  <ul>
+    <li  *ngFor="let launch of launches">
+      {{launch.rocket.rocket_name}}
+    </li>
+  </ul>
+</div>
+
+{{launches | json}}
