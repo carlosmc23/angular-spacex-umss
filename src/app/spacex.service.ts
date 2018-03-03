@@ -15,4 +15,9 @@ export class SpacexService {
      return this.httpClient
       .get<Launch[]>('https://api.spacexdata.com/v2/launches');
    }
+
+   public getLatestLaunch(): Observable<Launch> {
+    return this.httpClient
+      .get<Launch>('https://api.spacexdata.com/v2/launches/latest');
+   }
 }
