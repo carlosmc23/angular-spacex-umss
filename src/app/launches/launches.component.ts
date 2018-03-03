@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Launch } from '../model/launch';
+import { SpacexService } from '../spacex.service';
 
 @Component({
   selector: 'asu-launches',
@@ -8,58 +9,22 @@ import { Launch } from '../model/launch';
 })
 export class LaunchesComponent implements OnInit {
 
-  launches: Launch[];
+  launches: Launch[] = [];
+  spacex: SpacexService;
 
-  constructor() { }
+  // Dependency Injection!!!(DI). Inyeccion de Dependencias
+  constructor(spacex: SpacexService) {
+    this.spacex = spacex;
+   }
 
   // Inicializacion del Componente
   ngOnInit() {
-    this.launches = [
-      {
-        launch_date_utc: '2018-02-22T14:17:00Z',
-        rocket: {
-          rocket_id: 'Falcon 9',
-          rocket_name: 'Falcon 9'
-        }
-      },
-      {
-        launch_date_utc: '2018-01-22T14:17:00Z',
-        rocket: {
-          rocket_id: 'Falcon 90',
-          rocket_name: 'Falcon 90'
-        }
-      },
+    this.spacex.getLaunches()
+      .subscribe((res) => {
+        this.launches = res;
+      });
 
-      {
-        launch_date_utc: '2018-01-22T14:17:00Z',
-        rocket: {
-          rocket_id: 'Falcon 90',
-          rocket_name: 'Falcon 90'
-        }
-      },
-      {
-        launch_date_utc: '2018-01-22T14:17:00Z',
-        rocket: {
-          rocket_id: 'Falcon 90',
-          rocket_name: 'Falcon 90'
-        }
-      },
-      {
-        launch_date_utc: '2018-01-22T14:17:00Z',
-        rocket: {
-          rocket_id: 'Falcon 90',
-          rocket_name: 'Falcon 90'
-        }
-      },
-      {
-        launch_date_utc: '2018-01-22T14:17:00Z',
-        rocket: {
-          rocket_id: 'Falcon 90',
-          rocket_name: 'Falcon 90'
-        }
-      }
-
-    ];
+    // setTimeout(() => this.launches = [], 10000);
   }
 
 }
